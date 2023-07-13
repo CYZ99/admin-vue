@@ -3,6 +3,8 @@ import type { Method } from 'axios'
 import type { DataType } from './types'
 import { BASE_URL, TIMEOUT } from './config'
 import { ElMessage } from 'element-plus'
+import cache from '@/utils/cache'
+import { LOGIN_TOKEN } from '@/global/constent'
 
 const instance = axios.create({
   // 1. 基础地址，超时时间
@@ -13,6 +15,10 @@ const instance = axios.create({
 // 请求拦截器，添加拦截token
 instance.interceptors.request.use(
   (config) => {
+    const token = cache.getCache(LOGIN_TOKEN)
+    if (token && config.headers) {
+      config.headers['Authorization'] = `Bearer ${token}`
+    }
     return config
   },
   (err) => Promise.reject(err)

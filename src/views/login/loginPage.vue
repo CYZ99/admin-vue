@@ -18,7 +18,7 @@ const handleLogin = () => {
   <div class="out-container">
     <h1 class="text-white">管理系统</h1>
     <div class="w-1xl h-md bg-white ring p-2xl flex flex-col flex-items-center br-2">
-      <div class="text-center flex justify-center flex-items-center w-sm m-4 mt-4 bg-tsp br-100 p-1">
+      <div class="text-center flex justify-center flex-items-center w-sm m-0 mt-4 bg-tsp br-100 p-1">
         <div @click="(e)=>currentTab = 0" class="c-tab" text-2xl  cursor-pointer  :class="currentTab === 0 ? 'active' : ''">账号登录</div>
         <div @click="(e)=>currentTab = 1" class="c-tab" text-2xl  cursor-pointer :class="currentTab === 1 ? 'active' : ''">短信登录</div>
       </div>

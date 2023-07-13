@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ElMessage } from 'element-plus'
 import type { ILogin } from '@/types/user'
 import type { User } from '@/types/user'
-import { loginApi } from '@/api/index'
+import { loginApi,getCaptchaApi } from '@/api/index'
 import cache from '@/utils/cache'
 import { LOGIN_TOKEN } from '@/global/constent'
 import router from '@/router'
@@ -25,6 +25,10 @@ const useUserStore = defineStore('user-store', {
       ElMessage.success('登录成功')
       // 路由跳转
       router.push('/')
+    },
+    async getCaptchaAction() {
+      const captcha = await getCaptchaApi()
+      return captcha.data as {img:string, text:string}
     }
   }
 })

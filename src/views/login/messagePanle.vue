@@ -42,7 +42,7 @@ const rules = reactive({
       </el-form-item>
       <div relative>
         <el-form-item prop="messageCode" size="large">
-          <el-input placeholder="请输入验证码" v-model="form.messageCode"></el-input>
+          <el-input placeholder="请输入短信验证码" v-model="form.messageCode"></el-input>
         </el-form-item>
         <span class="code text-primary">获取短信验证码</span>
       </div>

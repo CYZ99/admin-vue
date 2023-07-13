@@ -5,3 +5,7 @@ import type { User } from "@/types"
 export const loginApi = (accout: string, password: string) => {
   return request<User>('/user/login', 'POST', {accout, password})
 }
+
+export const getCaptchaApi = () => {
+  return request('/captcha', 'GET')
+}

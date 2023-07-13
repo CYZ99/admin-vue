@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted } from 'vue'
 import type { ILogin } from '@/types/index'
 import type {  ElForm } from 'element-plus'
 import { ElMessage } from 'element-plus'
@@ -11,7 +11,19 @@ const storageForm = cache.getCache(REMEMBER_PASWWORD)
 const form = reactive<ILogin>({
   accout: storageForm?.accout || '',
   password: storageForm?.password || '',
+  code: ''
 })
+
+const captcha = ref('')
+const toLowCaptcha = ref('')
+
+const validatePass = (rule: any, value: string, callback: any) => {
+  if (value === '') {
+    callback(new Error('请输入验证码'))
+  } else if(value !== toLowCaptcha.value) {
+    callback(new Error('验证码不正确'))
+  } else callback()
+}
 
 const rules = reactive({
   accout: [
@@ -31,6 +43,10 @@ const rules = reactive({
       trigger: 'blur'
     }
   ],
+  code: [
+    { required: true, message: '验证码不能为空', trigger: 'blur' },
+    { validator: validatePass, trigger: 'blur'}
+  ]
 })
 
 const formRef = ref<InstanceType<typeof ElForm>>()
@@ -46,10 +62,18 @@ function loginAction() {
         cache.setCache(REMEMBER_PASWWORD, form)
       }
     } else {
-      ElMessage.error('请输入正确格式的账号和密码')
+      ElMessage.error('请输入正确格式的账号和密码,验证码小写字母即可')
     }
   })
 }
+const refreshCaptcha = async () => {
+  const data = await loginStore.getCaptchaAction()
+  captcha.value = data.img
+  toLowCaptcha.value = data.text
+}
+onMounted(async () => {
+  refreshCaptcha()
+})
 
 defineExpose({
   loginAction
@@ -65,6 +89,13 @@ defineExpose({
       <el-form-item prop="password" password size="large">
         <el-input placeholder="请输入密码" show-password v-model="form.password"></el-input>
       </el-form-item>
+      <div flex flex-items-center>
+        <el-form-item prop="code" class="verfrtiy-code" size="large">
+          <el-input placeholder="请输入验证码"  v-model="form.code"></el-input>
+        </el-form-item>
+        <div class="ml-2 -mt-5" @click="refreshCaptcha" v-html="captcha"></div>
+      </div>
+
       <div flex flex-justify-between flex-items-center>
         <div>
           <el-checkbox v-model="isRemPwd">记住密码</el-checkbox>
@@ -80,14 +111,12 @@ defineExpose({
 
 <style scoped>
 :deep(.el-input__inner){
-  height: 50px;
+  height: 44px;
   font-size: large;
 }
 
-.code{
-  position: absolute;
-  top:18px;
-  cursor: pointer;
-  right: 10px;
+.verfrtiy-code :deep(.el-input){
+  width: 255px;
 }
+
 </style>

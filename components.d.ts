@@ -14,5 +14,6 @@ declare module 'vue' {
     ElInput: typeof import('element-plus/es')['ElInput']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VerifyComp: typeof import('./src/components/verifyComp.vue')['default']
   }
 }
