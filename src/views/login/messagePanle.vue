@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
-import type { Login } from '@/types/index'
+import type { ILogin } from '@/types/index'
 
-const form = reactive<Login>({
+const form = reactive<ILogin>({
   mobile: undefined,
   messageCode: ''
 })

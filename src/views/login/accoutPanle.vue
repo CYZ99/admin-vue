@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
-import type { Login } from '@/types/index'
+import { reactive, ref } from 'vue'
+import type { ILogin } from '@/types/index'
+import type {  ElForm } from 'element-plus'
+import { ElMessage } from 'element-plus'
+import useUserStore from '@/stores/userStore'
+import cache from '@/utils/cache'
+import { REMEMBER_PASWWORD } from '@/global/constent'
+const storageForm = cache.getCache(REMEMBER_PASWWORD)
 
-const form = reactive<Login>({
-  account: '',
-  password: '',
-  code: ''
+const form = reactive<ILogin>({
+  accout: storageForm?.accout || '',
+  password: storageForm?.password || '',
 })
+
 const rules = reactive({
-  account: [
-    { require: true, message: '账号不能为空', trigger: 'blur' },
+  accout: [
+    { required: true, message: '账号不能为空', trigger: 'blur' },
     {
       min: 3,
       max: 8,
@@ -18,30 +24,55 @@ const rules = reactive({
     }
   ],
   password: [
-    { require: true, message: '密码不能为空', trigger: 'blur' },
+    { required: true, message: '密码不能为空', trigger: 'blur' },
     {
       pattern: /^[a-z0-9]{6,}$/,
       message: '必须是6位以上的数字或字母组成',
       trigger: 'blur'
     }
-  ]
+  ],
+})
+
+const formRef = ref<InstanceType<typeof ElForm>>()
+const loginStore = useUserStore()
+const isRemPwd = ref(false)
+
+// 登录方法
+function loginAction() {
+  formRef.value?.validate((valid) => {
+    if (valid) {
+      loginStore.loginAccoutAction(form)
+      if (isRemPwd.value) {
+        cache.setCache(REMEMBER_PASWWORD, form)
+      }
+    } else {
+      ElMessage.error('请输入正确格式的账号和密码')
+    }
+  })
+}
+
+defineExpose({
+  loginAction
 })
 </script>
 
 <template>
-  <div class="accout-panle" m4>
-    <el-form :model="form" size="large" :rules="rules">
-      <el-form-item prop="account" size="large">
-        <el-input placeholder="请输入账号" v-model="form.account"></el-input>
+  <div class="accout-panle" m8>
+    <el-form :model="form" size="large" :rules="rules" ref="formRef">
+      <el-form-item prop="accout" >
+        <el-input placeholder="请输入账号" v-model="form.accout"></el-input>
       </el-form-item>
       <el-form-item prop="password" password size="large">
         <el-input placeholder="请输入密码" show-password v-model="form.password"></el-input>
       </el-form-item>
-      <div relative>
-        <el-form-item prop="messageCode" password>
-          <el-input placeholder="请输入验证码" show-password v-model="form.code"></el-input>
-        </el-form-item>
-        <span class="code text-primary">1123</span>
+      <div flex flex-justify-between flex-items-center>
+        <div>
+          <el-checkbox v-model="isRemPwd">记住密码</el-checkbox>
+        </div>
+        <div>
+          <span style="margin-right:10px; color:burlywood; cursor: pointer;">找回密码</span>
+          <span style="color:cadetblue; cursor: pointer;">注册账号</span>
+        </div>
       </div>
     </el-form>
   </div>

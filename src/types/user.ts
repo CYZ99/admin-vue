@@ -6,14 +6,14 @@ export type User = {
   /** 用户名称 */
   account: string
   /** 手机号 */
-  mobile: number
+  mobile?: number
   /** 头像 */
-  avatar: string
+  avatar?: string
 }
 
-export type Login = {
+export interface ILogin {
   // 账号
-  account?: string
+  accout?: string
   // 手机号码
   mobile?: number
   // 密码

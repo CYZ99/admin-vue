@@ -4,7 +4,8 @@ import 'virtual:uno.css'
 import '@unocss/reset/normalize.css'
 import App from './App.vue'
 import router from './router'
-
+import 'element-plus/theme-chalk/el-message.css'
+import 'nprogress/nprogress.css'
 const app = createApp(App)
 
 app.use(pinia)
