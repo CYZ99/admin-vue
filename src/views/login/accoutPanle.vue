@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { reactive, ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import type { ILogin } from '@/types/index'
 import type {  ElForm } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import useUserStore from '@/stores/userStore'
 import cache from '@/utils/cache'
 import { REMEMBER_PASWWORD } from '@/global/constent'
+import { loginRules } from '@/utils/rules'
+
 const storageForm = cache.getCache(REMEMBER_PASWWORD)
 
 const form = reactive<ILogin>({
@@ -17,42 +20,14 @@ const form = reactive<ILogin>({
 const captcha = ref('')
 const toLowCaptcha = ref('')
 
-const validatePass = (rule: any, value: string, callback: any) => {
-  if (value === '') {
-    callback(new Error('请输入验证码'))
-  } else if(value !== toLowCaptcha.value) {
-    callback(new Error('验证码不正确'))
-  } else callback()
-}
 
-const rules = reactive({
-  accout: [
-    { required: true, message: '账号不能为空', trigger: 'blur' },
-    {
-      min: 3,
-      max: 8,
-      message: '帐号由3-8位的数字或者字母组成',
-      trigger: 'blur'
-    }
-  ],
-  password: [
-    { required: true, message: '密码不能为空', trigger: 'blur' },
-    {
-      pattern: /^[a-z0-9]{6,}$/,
-      message: '必须是6位以上的数字或字母组成',
-      trigger: 'blur'
-    }
-  ],
-  code: [
-    { required: true, message: '验证码不能为空', trigger: 'blur' },
-    { validator: validatePass, trigger: 'blur'}
-  ]
-})
+
+const rules = loginRules
 
 const formRef = ref<InstanceType<typeof ElForm>>()
 const loginStore = useUserStore()
 const isRemPwd = ref(false)
-
+const router = useRouter()
 // 登录方法
 function loginAction() {
   formRef.value?.validate((valid) => {
@@ -102,7 +77,7 @@ defineExpose({
         </div>
         <div>
           <span style="margin-right:10px; color:burlywood; cursor: pointer;">找回密码</span>
-          <span style="color:cadetblue; cursor: pointer;">注册账号</span>
+          <span style="color:cadetblue; cursor: pointer;" @click="router.push('/register')">注册账号</span>
         </div>
       </div>
     </el-form>

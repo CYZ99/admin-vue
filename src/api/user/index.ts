@@ -9,3 +9,7 @@ export const loginApi = (accout: string, password: string) => {
 export const getCaptchaApi = () => {
   return request('/captcha', 'GET')
 }
+
+export const registerApi = (accout: string, password: string, email:string) => {
+  return request('/user/register', 'POST', { accout, password, email })
+}

@@ -5,6 +5,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
@@ -14,11 +16,26 @@ export default defineConfig({
     vueJsx(),
     UnoCSS(),
     AutoImport({
-      resolvers: [ElementPlusResolver()]
+      resolvers: [
+        ElementPlusResolver(),
+        // 自动导入图标
+        IconsResolver({
+          prefix: 'Icon'
+        })
+      ]
     }),
     Components({
-      resolvers: [ElementPlusResolver()]
-    })
+      resolvers: [
+        ElementPlusResolver(),
+        // 自动注册图标组件
+        IconsResolver({
+          enabledCollections: ['ep'],
+        }),
+      ]
+    }),
+    Icons({
+      autoInstall: true,
+    }),
   ],
   resolve: {
     alias: {
@@ -30,7 +47,7 @@ export default defineConfig({
     port: 5174,
     open: true,
     proxy: {
-      '/api':'http://127.0.0.1:3000',
+      '/api': 'http://127.0.0.1:3000'
     }
   }
 })
