@@ -26,7 +26,8 @@ export default defineConfig({
         'background-clip': 'text',
         color: 'transparent'
       }
-    ]
+    ],
+    ['font-size10', {'font-szie': '20px'}]
   ],
   theme: {
     colors: {
