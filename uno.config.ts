@@ -27,17 +27,18 @@ export default defineConfig({
         color: 'transparent'
       }
     ],
-    ['font-size10', {'font-szie': '20px'}]
+    ['font-size10', { 'font-szie': '20px' }]
   ],
   theme: {
     colors: {
       veryCool: 'linear-grdient-text', // class="text-very-cool"
       brand: {
-        primary: 'rgba(14, 165, 233)' //class="bg-brand-primary"
+        primary: 'rgba(14, 165, 233)', //class="bg-brand-primary"
+        bgcolor: '#f3f4f6'
       },
       default: {
-        bgHeader: '#fff',
-        bgAside: '#051328'
+        bgHeader: '#E8F3FF',
+        bgAside: '#fff'
       },
       primary: 'rgba(14, 165, 233)'
     }

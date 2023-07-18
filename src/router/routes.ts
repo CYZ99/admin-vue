@@ -3,7 +3,9 @@ const loginPage = () => import('@/views/login/loginPage.vue')
 const notFoundPage = () => import('@/views/NotFound.vue')
 const registerPage = () => import('@/views/register/registerPage.vue')
 const indexPage = () => import('@/views/indexPage.vue')
-
+const userPage = () => import('@/views/user/userPage.vue')
+const menuPage = () => import('@/views/menu/menuPage.vue')
+const rolePage = () => import('@/views/role/rolePage.vue')
 
 const routes = [
   {
@@ -17,6 +19,24 @@ const routes = [
         name: '首页数据',
         meta: { title: '首页' },
         component: indexPage
+      },
+      {
+        path: '/user',
+        name: '用户管理',
+        meta: { title: '用户管理' },
+        component: userPage
+      },
+      {
+        path: '/menu',
+        name: '菜单管理',
+        meta: { title: '菜单管理' },
+        component: menuPage
+      },
+      {
+        path: '/role',
+        name: '角色管理',
+        meta: { title: '角色管理' },
+        component: rolePage
       }
     ]
   },

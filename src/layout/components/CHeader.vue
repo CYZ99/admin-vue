@@ -22,7 +22,7 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <div class="flex justify-between flex-items-center mt-4">
+  <div class="flex justify-between flex-items-center mt-4 ">
     <!-- 左侧 -->
     <div  @click="homeStore.toggleAsideWidthAction()">
       <el-icon>
@@ -70,7 +70,7 @@ const handleSubmit = () => {
         </template>
       </el-dropdown>
       <from-drawer :size="550" title="用户信息" ref="drawerRef" confirm-text="提交" @submit="handleSubmit">
-        
+
       </from-drawer>
     </div>
   </div>

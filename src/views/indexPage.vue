@@ -251,7 +251,7 @@ onMounted(() => {
   border-radius: 50%;
 }
 .pie-container{
-  height: 300px;
+  height: 36vh;
   width: 100%;
 }
 </style>
