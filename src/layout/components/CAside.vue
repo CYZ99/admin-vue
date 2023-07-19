@@ -34,27 +34,22 @@ const handleClose = (key: string, keyPath: string[]) => {
     @close="handleClose"
   >
     <el-menu-item index="/">
-      <el-icon><setting /></el-icon>
-      <template #title>首页</template>
+      <el-icon><Monitor /></el-icon>
+      <template #title>数据统计</template>
     </el-menu-item>
-    <el-menu-item index="/role">
-      <el-icon><Avatar /></el-icon>
-      <template #title>角色管理</template>
-    </el-menu-item>
-    <el-menu-item index="/user">
-      <el-icon><User /></el-icon>
-      <template #title>用户管理</template>
-    </el-menu-item>
-    <el-menu-item index="/menu">
-      <el-icon><Menu /></el-icon>
-      <template #title>菜单管理</template>
-    </el-menu-item>
-    <el-sub-menu index="/menu">
+    <el-sub-menu index="/system">
       <template #title>
-        <el-icon><location /></el-icon>
-        <span>二级菜单</span>
+        <el-icon><Setting /></el-icon>
+        <span>系统管理</span>
       </template>
+      <el-menu-item index="/role">角色管理</el-menu-item>
+      <el-menu-item index="/user">用户管理</el-menu-item>
+      <el-menu-item index="/menu">菜单管理</el-menu-item>
     </el-sub-menu>
+    <el-menu-item index="/gpt">
+      <el-icon><DataAnalysis /></el-icon>
+      <template #title>CharGpt</template>
+    </el-menu-item>
   </el-menu>
 </template>
 

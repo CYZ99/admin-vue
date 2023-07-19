@@ -2,3 +2,18 @@ html, body{
   margin: 0;
   padding: 0;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #9ec1fd;
+  border-radius: 3px;
+}
+
+#nprogress .bar {
+  background-color: #9ec1fd !important;
+  height: 3px !important;
+}

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { UserFilled  } from '@element-plus/icons-vue'
 import { useFullscreen } from '@vueuse/core'
 const  { isFullscreen, toggle } = useFullscreen()
 import useHomeStore from '@/stores/homeStore'
@@ -56,7 +55,7 @@ const handleSubmit = () => {
       </span>
       <el-dropdown>
         <span class="el-dropdown-link">
-          <el-avatar shape="circle" :size="25" class="mr-1" :icon="UserFilled" />
+          <el-avatar shape="circle" :size="25" class="mr-1" :src="userStore.avatar" />
           {{ userStore.accout }}
           <el-icon class="el-icon--right">
             <arrow-down />

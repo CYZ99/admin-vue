@@ -1,6 +1,6 @@
 // import type { DataType } from "../types"
 import { request } from '@/api/http'
-import type { User } from "@/types"
+import type { IRegister, User, UserInfo } from '@/types'
 // 登录接口
 export const loginApi = (accout: string, password: string) => {
   return request<User>('/user/login', 'POST', {accout, password})
@@ -11,5 +11,9 @@ export const getCaptchaApi = () => {
 }
 
 export const registerApi = (accout: string, password: string, email:string) => {
-  return request('/user/register', 'POST', { accout, password, email })
+  return request<IRegister>('/user/register', 'POST', { accout, password, email })
+}
+
+export const getUserInfoApi = (id: number) => {
+  return request<UserInfo>(`/user/info/:${id}`, 'GET')
 }

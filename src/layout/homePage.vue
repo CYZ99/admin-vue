@@ -20,14 +20,14 @@ const homeStore = useHomeStore()
       <el-aside :width="homeStore.asideWidth" class="aside" :class="theme.default.bgAside">
         <c-aside></c-aside>
       </el-aside>
-      <el-container class="bg-brand-bgcolor overflow-hidden">
+      <el-container class="bg-brand-bgcolor">
         <!-- 头部 -->
         <el-header :class="theme.default.bgHeader">
           <c-header></c-header>
         </el-header>
         <!-- 标签 -->
         <c-tag-list></c-tag-list>
-        <el-main class="bg-white m-3 reletive">
+        <el-main class="bg-white m-3">
           <router-view v-slot="{ Component }">
             <transition name="fade">
               <keep-alive :max="10">
@@ -75,6 +75,11 @@ const homeStore = useHomeStore()
 
 :deep(.el-header){
   height: 52px !important;
+  /* position: fixed; */
+}
+
+:deep(.el-main){
+  overflow-y: auto;
 }
 
 .aside::-webkit-scrollbar{

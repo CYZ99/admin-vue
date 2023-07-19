@@ -2,11 +2,14 @@
 import { reactive, ref, onMounted } from 'vue'
 import indexCard from '@/components/indexCard.vue'
 import { ElMessage } from 'element-plus';
+import useUserStore from '@/stores/userStore'
 import * as echarts from 'echarts'
 import CountTo from '@/components/CountTo.vue';
 
+
 const pie = ref<HTMLElement>()
 const pieTwo = ref<HTMLElement>()
+const userStore = useUserStore()
 
 const colorObj = {
   green: '#00B42A',
@@ -91,6 +94,8 @@ onMounted(() => {
     ]
   }
   myChartTwo.setOption(optionsTwo)
+  // 加载首页获取用户信息
+  userStore.getUserAction()
 })
 
 </script>
@@ -102,7 +107,7 @@ onMounted(() => {
         <indexCard>
           <template #header>
             <div class="flex flex-items-center">
-              <el-avatar :size="50" src="https://cyzblog-1305365553.cos.ap-guangzhou.myqcloud.com/title.jpg?q-sign-algorithm=sha1&q-ak=AKIDVuBbcK-wVVGg8QwBJb1cY0xhf4fxfmUgAew4M2l7ybEmkl079FMvaFnK2QlD57qs&q-sign-time=1689504024;1689507624&q-key-time=1689504024;1689507624&q-header-list=host&q-url-param-list=ci-process&q-signature=f1021a5f0bcda9f4301152e48b0bacec51243bc1&x-cos-security-token=8M66yIf1kttvNaoTW5817hQtSI2gbWxadac73fb8aae466a6f27090c674e7890aX6LPZnuc4XjYDjszE-dHHOrEPimuxmL6AruDxLPOUkEr1FNsPBkzwu9lOSXCkd_1elGEXSCCIDB5R0kbuMtLF_xP1Zffp71_nDhRlPn4c51NfvKBhoL6Csp0O_fEEY8qESTwU6EUI6OKPHm7drql0itrFIhP_mmvb0v-TrfynrZxiFEtV2IbdWm9p443T0jS&ci-process=originImage"/>
+              <el-avatar :size="50" :src="userStore.avatar"/>
               <div class="ml-2">管理员 CYZ99</div>
             </div>
           </template>

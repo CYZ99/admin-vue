@@ -43,3 +43,22 @@ export interface IRegister {
   // 邮箱
   rePassword?: string
 }
+
+export interface UserInfo {
+  /** 用户ID */
+    /** 用户ID */
+    id: number
+    /* 邮箱 */
+    email?: string
+    /** 用户名称 */
+    accout: string
+    /** 手机号 */
+    phoneNum?: number
+    /** 头像 */
+    avatar?: string
+    createTime: string
+    updateTime: string
+    roleName: string
+    roleId: number
+    roleIntro: string
+}
