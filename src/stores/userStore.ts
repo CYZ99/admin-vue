@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
-import { ElMessage } from 'element-plus'
-import type { ILogin, IRegister } from '@/types/user'
-import type { User } from '@/types/user'
-import { loginApi, getCaptchaApi, registerApi, getUserInfoApi } from '@/api/index'
-import cache from '@/utils/cache'
-import { LOGIN_TOKEN, USER_ID, USER_INFO } from '@/global/constent'
 import router from '@/router'
+import cache from '@/utils/cache'
+import { ElMessage } from 'element-plus'
+import type { ILogin, IRegister, User } from '@/types/user'
+import { LOGIN_TOKEN, USER_ID, USER_INFO } from '@/global/constent'
+import { loginApi, getCaptchaApi, registerApi, getUserInfoApi, getEmailCodeApi } from '@/api/index'
+import useHomeStore from './homeStore'
 
+const homeStore = useHomeStore()
 
 const useUserStore = defineStore('user-store', {
   state: (): User => {
@@ -14,8 +15,9 @@ const useUserStore = defineStore('user-store', {
       token: '',
       id: 0,
       accout: '',
-      code: '',
-      avatar: '',
+      avatar: cache.getCache(USER_INFO)?.avatar || '',
+      email: cache.getCache(USER_INFO)?.email || '',
+      emailCode: '',
     }
   },
   actions: {
@@ -38,7 +40,8 @@ const useUserStore = defineStore('user-store', {
       this.$state = {
         accout: '',
         id: 0,
-        token: ''
+        token: '',
+        email: ''
       }
       cache.removeItemCache(LOGIN_TOKEN)
       cache.removeItemCache(USER_INFO)
@@ -49,15 +52,21 @@ const useUserStore = defineStore('user-store', {
       const userId = cache.getCache(USER_ID)
       const res = await getUserInfoApi(userId)
       this.avatar = res.data.avatar
-      // console.log(res.data.data.avatar)
+      // 获取 menu 菜单信息
+      homeStore.getMenusByIdAction()
       cache.setCache(USER_INFO, res.data)
     },
     async registerAction(data: IRegister) {
       if (data) {
-        const res = registerApi(data.regAccout!, data.regPassword!, data.email!)
-        console.log(res)
+        const res = await registerApi(data.regAccout!, data.regPassword!, data.email!)
+        return res
       }
-    }
+    },
+    async getEmailCodeAction(email: string) {
+      const res = await getEmailCodeApi(email)
+      this.emailCode = res.data as string
+    },
+
   },
 })
 

@@ -21,19 +21,19 @@ const routes = [
         component: indexPage
       },
       {
-        path: '/user',
+        path: '/system/user',
         name: '用户管理',
         meta: { title: '用户管理' },
         component: userPage
       },
       {
-        path: '/menu',
+        path: '/system/menu',
         name: '菜单管理',
         meta: { title: '菜单管理' },
         component: menuPage
       },
       {
-        path: '/role',
+        path: '/system/role',
         name: '角色管理',
         meta: { title: '角色管理' },
         component: rolePage

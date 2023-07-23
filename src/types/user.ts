@@ -4,15 +4,19 @@ export type User = {
   /** 用户ID */
   id: number
   /* 邮箱 */
-  email?: string
+  email: string
   /** 用户名称 */
   accout: string
   /** 手机号 */
   mobile?: number
   /** 头像 */
   avatar?: string
-  /** 验证码 */
+  /** 邮箱验证码 */
+  emailCode?: string
+  /** 图形验证码 */
   code?: string
+  roleId?: number,
+  roleName?: string,
 }
 
 export interface ILogin {
@@ -40,7 +44,7 @@ export interface IRegister {
   regPassword?: string
   // 验证码
   code?: string
-  // 邮箱
+  //
   rePassword?: string
 }
 

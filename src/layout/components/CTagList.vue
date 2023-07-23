@@ -1,29 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { TabsPaneContext } from 'element-plus'
+import { useTabList } from '@/hooks/useTabList'
 
-const activeName = ref('first')
-
-const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event)
-}
-const removeTab = () => {
-  console.log(11)
-}
+const { activeTab, tabList, removeTabItem, clickTabItem  } = useTabList()
 </script>
 
 <template>
   <div class="tagList">
     <el-tabs
-      v-model="activeName"
+      v-model="activeTab"
       type="card"
       class="demo-tabs"
-      @tab-click="handleClick"
-      closable
-      @tab-remove="removeTab"
+      @tab-change="clickTabItem"
+      @tab-remove="removeTabItem"
     >
-      <el-tab-pane label="User" name="first"></el-tab-pane>
-      <el-tab-pane label="User" name="first"></el-tab-pane>
+      <template v-for="item in tabList" :key="item.name">
+        <el-tab-pane :closable="item.path !== '/'" :label="item.title" :name="item.path"></el-tab-pane>
+      </template>
     </el-tabs>
   </div>
 </template>
@@ -31,8 +23,8 @@ const removeTab = () => {
 <style scoped>
 .tagList :deep(.el-tabs__item) {
   top: 0px;
-  left: 10px;
-  width: 90px;
+  left: 12px;
+  /* width: 90px; */
   height: 32px;
   margin-right: 8px;
   /* border: 1px solid #999; */
@@ -47,7 +39,8 @@ const removeTab = () => {
   margin-top: 8px;
   height: 32px;
 }
-.tagList :deep(.el-tabs--card>.el-tabs__header .el-tab__nav){
+.tagList :deep(.el-tabs--card>.el-tabs__header .el-tabs__nav){
   border: none;
 }
+
 </style>

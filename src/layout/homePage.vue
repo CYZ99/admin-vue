@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
-import CTagList from './components/CTagList.vue';
+import CTagList from './components/CTagList.vue'
 import useHomeStore from '@/stores/homeStore'
-import CHeader from './components/CHeader.vue';
-import CAside from './components/CAside.vue';
+import CHeader from './components/CHeader.vue'
+import CAside from './components/CAside.vue'
+
 const theme = reactive({
   default: {
     bgHeader: 'bg-default-bgHeader',
-    bgAside:'bg-default-bgAside'
+    bgAside: 'bg-default-bgAside'
   }
 })
 
@@ -42,13 +43,13 @@ const homeStore = useHomeStore()
 </template>
 
 <style scoped>
-.aside{
+.aside {
   transition: all 0.5s;
   height: 100vh;
   color: #fff;
   overflow-y: auto;
 }
-.fade-enter-from{
+.fade-enter-from {
   opacity: 0;
   transform: translate3d(-100%, 0, 0);
 }
@@ -57,11 +58,11 @@ const homeStore = useHomeStore()
   opacity: 1;
 }
 
-.fade-leave-from{
+.fade-leave-from {
   opacity: 1;
 }
 
-.fade-leave-to{
+.fade-leave-to {
   opacity: 0;
   transform: translate3d(100%, 0, 0);
 }
@@ -69,20 +70,20 @@ const homeStore = useHomeStore()
 .fade-leave-active {
   transition: all 0.5s ease;
 }
-.fade-enter-active{
+.fade-enter-active {
   transition-delay: 0.4s;
 }
 
-:deep(.el-header){
+:deep(.el-header) {
   height: 52px !important;
   /* position: fixed; */
 }
 
-:deep(.el-main){
+:deep(.el-main) {
   overflow-y: auto;
 }
 
-.aside::-webkit-scrollbar{
+.aside::-webkit-scrollbar {
   width: 0;
 }
 </style>

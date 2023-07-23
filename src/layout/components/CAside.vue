@@ -1,55 +1,56 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import useHomeStore from '@/stores/homeStore'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
-
 const homeStore = useHomeStore()
 const router = useRouter()
 
 const { isCollapse } = storeToRefs(homeStore)
-const defaultActive = ref('/')
+const defaultActive = ref<string>('/')
+let menu:any = ref([])
 
-const handlerSelect = (e: any) => {
+
+
+nextTick(() => {
+  menu.value = homeStore.menu
+  console.log(menu.value)
+})
+
+const handleSelect = (e: any) => {
   router.push(e)
-}
-
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
 }
 </script>
 
 <template>
   <el-menu
     :default-active="defaultActive"
-    class="el-menu-vertical-demo"
     :collapse="isCollapse"
+    @select="handleSelect"
     :collapse-transition="false"
     :unique-opened="true"
-    @select="handlerSelect"
-    @open="handleOpen"
-    @close="handleClose"
   >
-    <el-menu-item index="/">
-      <el-icon><Monitor /></el-icon>
-      <template #title>数据统计</template>
-    </el-menu-item>
-    <el-sub-menu index="/system">
-      <template #title>
-        <el-icon><Setting /></el-icon>
-        <span>系统管理</span>
-      </template>
-      <el-menu-item index="/role">角色管理</el-menu-item>
-      <el-menu-item index="/user">用户管理</el-menu-item>
-      <el-menu-item index="/menu">菜单管理</el-menu-item>
-    </el-sub-menu>
-    <el-menu-item index="/gpt">
-      <el-icon><DataAnalysis /></el-icon>
-      <template #title>CharGpt</template>
-    </el-menu-item>
+  <!-- 二级菜单 -->
+    <template v-for="item in menu" :key="item.id">
+      <el-sub-menu v-if="item.children" :index="item.url">
+        <template #title>
+          <el-icon>
+            <component :is="item.icon"></component>
+          </el-icon>
+          <span>{{ item.name }}</span>
+        </template>
+        <template v-for="subItem in item.children" :key="subItem.id">
+          <el-menu-item :index="subItem.url">{{ subItem.name }}</el-menu-item>
+        </template>
+      </el-sub-menu>
+      <!-- 一级菜单 -->
+      <el-menu-item v-else :index="item.url">
+          <el-icon>
+            <component :is="item.icon"></component>
+          </el-icon>
+          <span>{{ item.name }}</span>
+      </el-menu-item>
+    </template>
   </el-menu>
 </template>
 
