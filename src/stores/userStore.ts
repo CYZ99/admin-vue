@@ -6,6 +6,8 @@ import type { ILogin, IRegister, User } from '@/types/user'
 import { LOGIN_TOKEN, USER_ID, USER_INFO } from '@/global/constent'
 import { loginApi, getCaptchaApi, registerApi, getUserInfoApi, getEmailCodeApi } from '@/api/index'
 import useHomeStore from './homeStore'
+import addDynamicRoute, { dynamicRoutes } from '@/hooks/useDynamicRoute'
+
 
 const homeStore = useHomeStore()
 
@@ -50,6 +52,7 @@ const useUserStore = defineStore('user-store', {
       const userId = cache.getCache(USER_ID)
       const res = await getUserInfoApi(userId as number)
       this.avatar = res.data?.avatar
+      addDynamicRoute(router, res.data.roleName, dynamicRoutes)
       cache.setCache(USER_INFO, res.data)
     },
     async registerAction(data: IRegister) {

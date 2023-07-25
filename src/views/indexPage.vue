@@ -94,8 +94,6 @@ onMounted(() => {
     ]
   }
   myChartTwo.setOption(optionsTwo)
-  // 加载首页获取用户信息
-  userStore.getUserAction()
 })
 
 </script>

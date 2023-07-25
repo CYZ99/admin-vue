@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
 import CTagList from './components/CTagList.vue'
 import useHomeStore from '@/stores/homeStore'
+import useUserStore from '@/stores/userStore'
 import CHeader from './components/CHeader.vue'
 import CAside from './components/CAside.vue'
 
@@ -11,8 +12,12 @@ const theme = reactive({
     bgAside: 'bg-default-bgAside'
   }
 })
-
+const userStore = useUserStore()
 const homeStore = useHomeStore()
+// 加载首页获取用户信息
+onMounted(() => {
+  userStore.getUserAction()
+})
 </script>
 
 <template>
