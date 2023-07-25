@@ -15,7 +15,7 @@ export const registerApi = (accout: string, password: string, email:string) => {
 }
 
 export const getUserInfoApi = (id: number) => {
-  return request<UserInfo>(`/user/info/:${id}`, 'GET')
+  return request<UserInfo>(`/user/info/${id}`, 'GET')
 }
 
 export const getEmailCodeApi = (email: string) => {

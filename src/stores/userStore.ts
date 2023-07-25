@@ -24,8 +24,10 @@ const useUserStore = defineStore('user-store', {
     async loginAccoutAction(data: ILogin) {
       const loginResult = await loginApi(data.accout as string, data.password as string)
       const token = loginResult.data.token
-      cache.setCache(USER_ID, loginResult)
+      cache.setCache(USER_ID, loginResult.data.id)
       cache.setCache(LOGIN_TOKEN, token)
+      // 获取 menu 菜单信息
+      homeStore.getMenusByIdAction()
       ElMessage.success('登录成功')
       // 路由跳转
       router.push('/')
@@ -37,23 +39,17 @@ const useUserStore = defineStore('user-store', {
       return data
     },
     async logoutAction() {
-      this.$state = {
-        accout: '',
-        id: 0,
-        token: '',
-        email: ''
-      }
-      cache.removeItemCache(LOGIN_TOKEN)
-      cache.removeItemCache(USER_INFO)
+      // 这里需要先清除 storage 中的数据然后再清除 pinia 内存中的数据因为 pinia 的初始值依赖于 storage
+      cache.clearCache()
+      this.$reset()
+      homeStore.$reset()
       ElMessage.success('退出登录成功')
       router.push('/login')
     },
     async getUserAction() {
       const userId = cache.getCache(USER_ID)
-      const res = await getUserInfoApi(userId)
-      this.avatar = res.data.avatar
-      // 获取 menu 菜单信息
-      homeStore.getMenusByIdAction()
+      const res = await getUserInfoApi(userId as number)
+      this.avatar = res.data?.avatar
       cache.setCache(USER_INFO, res.data)
     },
     async registerAction(data: IRegister) {

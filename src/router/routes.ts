@@ -6,6 +6,7 @@ const indexPage = () => import('@/views/indexPage.vue')
 const userPage = () => import('@/views/user/userPage.vue')
 const menuPage = () => import('@/views/menu/menuPage.vue')
 const rolePage = () => import('@/views/role/rolePage.vue')
+const gptPage = () => import('@/views/gpt/gptPage.vue')
 
 const routes = [
   {
@@ -37,6 +38,12 @@ const routes = [
         name: '角色管理',
         meta: { title: '角色管理' },
         component: rolePage
+      },
+      {
+        path: '/gpt/gptPage',
+        name: 'gpt',
+        meta: { title: 'gpt' },
+        component: gptPage
       }
     ]
   },

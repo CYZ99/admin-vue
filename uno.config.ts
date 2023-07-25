@@ -17,6 +17,7 @@ export default defineConfig({
     ['br-2', { 'border-radius': '10px' }],
     ['br-100', { 'border-radius': '100px' }],
     ['bg-tsp', { 'background-color': '#f4f5f7' }],
+    ['bg-light-gray', { 'background-color': '#f3f4f6' }],
     ['active', { color: 'rgba(14, 165, 233)', 'background-color': '#fff' }],
     [
       'linear-grdient-text',

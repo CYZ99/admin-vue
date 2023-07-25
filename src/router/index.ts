@@ -10,9 +10,9 @@ const router = createRouter({
 })
 
 // 路由导航守卫
-router.beforeEach((to) => {
+router.beforeEach(async (to) => {
   NProgress.start()
-  const token = cache.getCache(LOGIN_TOKEN)
+  const token = await cache.getCache(LOGIN_TOKEN)
   if (to.path === '/' && !token) {
     return '/login'
   }

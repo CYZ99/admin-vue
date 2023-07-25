@@ -29,9 +29,8 @@ const useHomeStore = defineStore('home-store', {
       }
     },
     async getMenusByIdAction() {
-      const userInfo = cache.getCache(USER_ID)
-      if (userInfo) {
-        const id = userInfo.data.id
+      const id = cache.getCache(USER_ID)
+      if (id) {
         const res = await getMenuByUserIdApi(id)
         this.menu = res.data
         if (!cache.getCache(MENU)) {
@@ -39,7 +38,7 @@ const useHomeStore = defineStore('home-store', {
         }
         return res
       }
-    }
+    },
   }
 })
 

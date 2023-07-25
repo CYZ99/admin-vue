@@ -27,6 +27,9 @@ instance.interceptors.request.use(
 // 响应拦截
 instance.interceptors.response.use(
   (res) => {
+    if (res.data.code == 401) {
+      cache.removeItemCache(LOGIN_TOKEN)
+    }
     if (res.data.code !== 0) {
       ElMessage.error(res.data.message || '业务错误')
       return Promise.reject(res.data)

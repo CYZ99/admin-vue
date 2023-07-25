@@ -190,6 +190,9 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.index-container{
+  margin-top: 10px;
+}
 .statistic-footer{
   font-size: 10px;
 }

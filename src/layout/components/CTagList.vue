@@ -5,22 +5,27 @@ const { activeTab, tabList, removeTabItem, clickTabItem  } = useTabList()
 </script>
 
 <template>
-  <div class="tagList">
-    <el-tabs
-      v-model="activeTab"
-      type="card"
-      class="demo-tabs"
-      @tab-change="clickTabItem"
-      @tab-remove="removeTabItem"
-    >
-      <template v-for="item in tabList" :key="item.name">
-        <el-tab-pane :closable="item.path !== '/'" :label="item.title" :name="item.path"></el-tab-pane>
-      </template>
-    </el-tabs>
+  <div class="bg-light-gray w-screen h48px fixed top-12 z-10">
+    <div class="tagList ">
+      <el-tabs
+        v-model="activeTab"
+        type="card"
+        class="demo-tabs"
+        @tab-change="clickTabItem"
+        @tab-remove="removeTabItem"
+      >
+        <template v-for="item in tabList" :key="item.name">
+          <el-tab-pane :closable="item.path !== '/'" :label="item.title" :name="item.path"></el-tab-pane>
+        </template>
+      </el-tabs>
+    </div>
   </div>
+  <!-- <div class="h-8 bg-sky-400 w-screen"></div> -->
 </template>
 
 <style scoped>
+
+
 .tagList :deep(.el-tabs__item) {
   top: 0px;
   left: 12px;
@@ -29,7 +34,7 @@ const { activeTab, tabList, removeTabItem, clickTabItem  } = useTabList()
   margin-right: 8px;
   /* border: 1px solid #999; */
   border-radius: 6px;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 .tagList :deep(.el-tabs--card>.el-tabs__header){
