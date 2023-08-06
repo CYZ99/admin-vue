@@ -1,4 +1,4 @@
-import useUserStore from '@/stores/userStore'
+import useUserStore from '@/stores/modules/userStore'
 const userStore = useUserStore()
 
 const validatePass = (rule: any, value: string, callback: any) => {

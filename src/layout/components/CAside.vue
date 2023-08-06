@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
-import useHomeStore from '@/stores/homeStore'
+import useHomeStore from '@/stores/modules/homeStore'
+import useUserStore from '@/stores/modules/userStore'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 const homeStore = useHomeStore()
+const userStore = useUserStore()
 const router = useRouter()
 
 const { isCollapse } = storeToRefs(homeStore)
@@ -12,7 +14,7 @@ const defaultActive = ref<string>('/')
 let menu:any = ref([])
 
 watchEffect(() => {
-  menu.value = homeStore.menu
+  menu.value = userStore.menu
 })
 
 const handleSelect = (e: any) => {
@@ -68,4 +70,4 @@ const handleSelect = (e: any) => {
   border: none;
 }
 
-</style>
+</style>@/stores/modules/homeStore

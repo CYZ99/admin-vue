@@ -17,6 +17,7 @@ export type User = {
   code?: string
   roleId?: number,
   roleName?: string,
+  menu: any
 }
 
 export interface ILogin {
@@ -61,7 +62,7 @@ export interface UserInfo {
     /** 头像 */
     avatar?: string
     createTime: string
-    updateTime: string
+    updateTime: string  
     roleName: string
     roleId: number
     roleIntro: string

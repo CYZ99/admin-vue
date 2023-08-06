@@ -1,5 +1,5 @@
 import { ElMessage,ElMessageBox } from "element-plus";
-import useUserStore from '@/stores/userStore'
+import useUserStore from '@/stores/modules/userStore'
 const userStore = useUserStore()
 // 退出登录
 export function useLogout() {

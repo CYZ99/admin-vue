@@ -3,8 +3,8 @@ const loginPage = () => import('@/views/login/loginPage.vue')
 const notFoundPage = () => import('@/views/NotFound.vue')
 const registerPage = () => import('@/views/register/registerPage.vue')
 const indexPage = () => import('@/views/indexPage.vue')
-
-
+const gptPage = () => import('@/views/gpt/gptPage.vue')
+const bigScreenPage = () => import('@/views/bigScreen/bigScreenPage.vue')
 
 export const routes = [
   {
@@ -20,31 +20,6 @@ export const routes = [
         component: indexPage
       },
     ]
-    //   {
-    //     path: '/system/user',
-    //     name: '用户管理',
-    //     meta: { title: '用户管理' },
-    //     component: userPage
-    //   },
-    //   {
-    //     path: '/system/menu',
-    //     name: '菜单管理',
-    //     meta: { title: '菜单管理' },
-    //     component: menuPage
-    //   },
-    //   {
-    //     path: '/system/role',
-    //     name: '角色管理',
-    //     meta: { title: '角色管理' },
-    //     component: rolePage
-    //   },
-    //   {
-    //     path: '/gpt/gptPage',
-    //     name: 'gpt',
-    //     meta: { title: 'gpt' },
-    //     component: gptPage
-    //   }
-    // ]
   },
   {
     path: '/login',
@@ -56,6 +31,18 @@ export const routes = [
     path: '/register',
     meta: { title: '注册' },
     component: registerPage
+  },
+  {
+    path: '/gpt',
+    name: 'gpt',
+    meta: { title: 'gpt' },
+    component: gptPage
+  },
+  {
+    path: '/bigScreen',
+    name: 'bigScreen',
+    meta: { title: 'bigScreen' },
+    component: bigScreenPage
   },
   {
     path: '/:pathMatch(.*)*',

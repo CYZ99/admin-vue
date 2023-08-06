@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 import { useFullscreen } from '@vueuse/core'
 const  { isFullscreen, toggle } = useFullscreen()
-import useHomeStore from '@/stores/homeStore'
-import useUserStore from '@/stores/userStore';
+import useHomeStore from '@/stores/modules/homeStore'
+import useUserStore from '@/stores/modules/userStore';
 import { useLogout } from '@/hooks/useModefiyUserInfo'
 import FromDrawer from '@/components/FromDrawer.vue';
 const homeStore = useHomeStore()
@@ -83,4 +83,4 @@ const handleSubmit = () => {
   display: flex;
   align-items: center;
 }
-</style>
+</style>@/stores/modules/homeStore@/stores/modules/userStore

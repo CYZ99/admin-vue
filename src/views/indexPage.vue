@@ -2,7 +2,7 @@
 import { reactive, ref, onMounted } from 'vue'
 import indexCard from '@/components/indexCard.vue'
 import { ElMessage } from 'element-plus';
-import useUserStore from '@/stores/userStore'
+import useUserStore from '@/stores/modules/userStore'
 import * as echarts from 'echarts'
 import CountTo from '@/components/CountTo.vue';
 
@@ -260,4 +260,4 @@ onMounted(() => {
   height: 36vh;
   width: 100%;
 }
-</style>
+</style>@/stores/modules/userStore

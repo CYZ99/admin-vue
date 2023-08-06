@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue'
 import CTagList from './components/CTagList.vue'
-import useHomeStore from '@/stores/homeStore'
-import useUserStore from '@/stores/userStore'
+import useHomeStore from '@/stores/modules/homeStore'
+import useUserStore from '@/stores/modules/userStore'
 import CHeader from './components/CHeader.vue'
 import CAside from './components/CAside.vue'
 
@@ -33,7 +33,7 @@ onMounted(() => {
         </el-header>
         <!-- 标签 -->
         <c-tag-list></c-tag-list>
-        <el-main class="bg-white m-4 mt-6  relative top-16">
+        <el-main class="bg-white m-4 mt-6">
           <router-view v-slot="{ Component }">
             <transition name="fade">
               <keep-alive :max="10">
@@ -58,6 +58,10 @@ onMounted(() => {
 .fade-enter-from {
   opacity: 0;
   transform: translate3d(-100%, 0, 0);
+}
+
+.el-main{
+  padding: 100px 20px 20px 20px;
 }
 
 .el-aside {
@@ -97,3 +101,4 @@ onMounted(() => {
   width: 0;
 }
 </style>
+@/stores/modules/homeStore@/stores/modules/userStore
